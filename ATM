@@ -1,0 +1,57 @@
+import java.util.Scanner;
+public class ATM {
+static Scanner sc = new Scanner(System.in);
+public static void main(String[]args) {
+	BankAccount hasini = new  BankAccount(1000.00 ,2006);
+System.out.println("****** WELCOME TO OURBANK ATM******");
+System.out.println("Please enter your pin :");
+int enteredPin = sc.nextInt();
+if(!hasini.validate(enteredPin)) {
+	System.out.println("IncorrectPin...");
+	sc.close();
+return;
+}
+boolean exit =false;
+while(!exit) {
+System.out.println("\n-----ATM MENU-----");
+System.out.println("1.Check Balance");
+System.out.println("2.Deposit Money");
+System.out.println("3.withdraw Money");
+System.out.println("4.Change PIN");
+System.out.println("5.EXIT");
+System.out.println("Choose an option");
+int choice = sc.nextInt();
+switch(choice) {
+case 1:
+	System.out.println("Your balance is : $ " + hasini.getBalance());
+	break;
+case 2:
+	System.out.println("Enter amount to deposit : $");
+double amount =	sc.nextDouble();
+hasini.deposit(amount);
+break;
+case 3:
+	System.out.println("Enter amount to withdraw : $");
+	double amount1=sc.nextDouble();
+	hasini.withdraw(amount1);
+	break;
+case 4:
+	System.out.println("Enter your current PIN to confirm:");
+	int currentPin = sc.nextInt();
+	if(hasini.validate(currentPin)) {
+		int newPin = sc.nextInt();
+		hasini.changePin(newPin);
+	}else {
+		System.out.println("Verification failed,cannot change the pin.");
+	}
+	break;
+case 5:
+	System.out.println("Thank You for using ATM.");	
+	exit=true;
+	break;
+	default:
+		System.out.println("Invalid option ! Please pick a option from 1 to 5");
+		}
+}
+}
+}
